@@ -8,8 +8,12 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './modules';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import ReduxThunk from 'redux-thunk';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger)));
+const store = createStore(
+  rootReducer, 
+  composeWithDevTools(applyMiddleware(ReduxThunk, logger))
+  );
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,7 +21,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
+ 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
